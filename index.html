@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PocketDay</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#FFF0F6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Inline SVG icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M5 3v8a3 3 0 0 0 3 3v7M8 3v6M11 3v8a3 3 0 0 1-3 3M17 21V3c-2 1-3 4-3 8h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-drinks" viewBox="0 0 24 24"><path d="M6 7h12l-1.5 13a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1L6 7zM5 7h14M13 7l2-5h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shopping" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8zM9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-transport" viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v10H4V6a2 2 0 0 1 2-2zM4 11h16M7 16v3M17 16v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="13.5" r="1" fill="currentColor"/><circle cx="16" cy="13.5" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-entertainment" viewBox="0 0 24 24"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8zM14 6v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-dasharray="0"/></symbol>
+    <symbol id="i-other" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="18" cy="12" r="1.8" fill="currentColor"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-goals" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <header class="topbar">
+    <span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 6 4 9 10 10-6 1-9 4-10 10-1-6-4-9-10-10 6-1 9-4 10-10z" fill="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>PocketDay</span>
+    <span class="topbar-date" id="todayLabel"></span>
+    <button type="button" class="sample-pill" id="samplePill" data-action="clear-sample" hidden aria-label="Sample data is showing. Clear sample data">Sample data<svg aria-hidden="true"><use href="#i-close"/></svg></button>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= HOME ================= -->
+    <section class="view" id="view-home" aria-labelledby="homeHeading">
+      <div class="notice notice-soft" id="reminderNotice" hidden>
+        <p>Quick check: did you buy anything today?</p>
+        <button type="button" class="link-btn" data-action="open-add">Add it</button>
+      </div>
+
+      <div class="today">
+        <h1 id="homeHeading" class="today-label">Today you've spent</h1>
+        <p class="today-amount" id="todayAmount" aria-live="polite">$0.00</p>
+      </div>
+
+      <div class="card week-card">
+        <div class="week-row">
+          <div>
+            <p class="week-left"><span id="weekLeft">$0</span> <span class="week-left-label" id="weekLeftLabel">left this week</span></p>
+            <p class="muted small" id="weekOf">of $0 budget</p>
+          </div>
+          <span class="chip" id="resetChip">Resets Sun</span>
+        </div>
+        <div class="bar" role="img" id="weekBar" aria-label="">
+          <span class="bar-fill bar-spent" id="barSpent"></span><span class="bar-fill bar-saved" id="barSaved"></span>
+        </div>
+        <div class="legend small">
+          <span><i class="dot dot-spent"></i>Spent <b id="legendSpent">$0</b></span>
+          <span id="legendSavedWrap"><i class="dot dot-saved"></i>Saved <b id="legendSaved">$0</b></span>
+        </div>
+      </div>
+
+      <!-- Pocket buddy: its face shows how the week is going (state you can see) -->
+      <div class="buddy-row">
+        <svg class="buddy" id="buddy" data-mood="happy" viewBox="0 0 56 56" aria-hidden="true">
+          <g data-show="happy ok"><circle class="b-coin" cx="37" cy="11" r="7.5" stroke-width="2.5"/><path class="b-line" d="M37 7.5v7" stroke-width="2" stroke-linecap="round"/></g>
+          <path class="b-drop" data-show="uhoh" d="M48 3c3.5 5 3.5 8 0 9.5-3.5-1.5-3.5-4.5 0-9.5z" stroke-width="1.8"/>
+          <rect class="b-body" x="5" y="15" width="46" height="37" rx="14" stroke-width="2.5"/>
+          <path class="b-line" d="M5.5 26c9 7 36 7 45 0" stroke-width="2.5" stroke-linecap="round"/>
+          <ellipse class="b-blush" cx="14" cy="43" rx="3.6" ry="2.3"/><ellipse class="b-blush" cx="42" cy="43" rx="3.6" ry="2.3"/>
+          <g data-show="happy" class="b-line" stroke-width="2.6" stroke-linecap="round"><path d="M17 39q3.5-4.5 7 0M32 39q3.5-4.5 7 0"/><path d="M24 43.5q4 4 8 0"/></g>
+          <g data-show="ok uhoh"><circle class="b-ink" cx="20.5" cy="38" r="2.6"/><circle class="b-ink" cx="35.5" cy="38" r="2.6"/></g>
+          <path data-show="ok" class="b-line" d="M25 44.5h6" stroke-width="2.6" stroke-linecap="round"/>
+          <path data-show="uhoh" class="b-line" d="M22 46q2-2.6 4 0t4 0 4 0" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <p class="insight" id="insight"></p>
+      </div>
+
+      <div class="section-head">
+        <h2>Recent</h2>
+        <button type="button" class="link-btn" data-go="history">See all</button>
+      </div>
+      <ul class="list" id="recentList"></ul>
+    </section>
+
+    <!-- ================= HISTORY ================= -->
+    <section class="view" id="view-history" aria-labelledby="historyHeading" hidden>
+      <h1 id="historyHeading" class="page-title">History</h1>
+
+      <div class="week-nav">
+        <button type="button" class="icon-btn" id="prevWeek" aria-label="Previous week"><svg><use href="#i-left"/></svg></button>
+        <div class="week-nav-label">
+          <strong id="weekRange"></strong>
+          <span class="muted small" id="weekTag"></span>
+        </div>
+        <button type="button" class="icon-btn" id="nextWeek" aria-label="Next week"><svg><use href="#i-right"/></svg></button>
+      </div>
+
+      <div class="stats">
+        <div><span class="muted small">Spent</span><strong id="hSpent">$0</strong></div>
+        <div><span class="muted small">Saved</span><strong id="hSaved">$0</strong></div>
+        <div><span class="muted small">Left</span><strong id="hLeft">$0</strong></div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">Each day</h2>
+        <div class="chart" id="chart" role="img"></div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">By category</h2>
+        <ul class="cats" id="catList"></ul>
+      </div>
+
+      <div id="dayGroups"></div>
+    </section>
+
+    <!-- ================= GOALS ================= -->
+    <section class="view" id="view-goals" aria-labelledby="goalsHeading" hidden>
+      <div class="page-head">
+        <h1 id="goalsHeading" class="page-title">Goals</h1>
+        <button type="button" class="btn btn-small" data-action="new-goal">New goal</button>
+      </div>
+      <p class="muted small goals-note">Money you save is set aside from your budget. It isn't counted as spending.</p>
+      <ul class="goals" id="goalList"></ul>
+    </section>
+
+    <!-- ================= SETTINGS ================= -->
+    <section class="view" id="view-settings" aria-labelledby="settingsHeading" hidden>
+      <h1 id="settingsHeading" class="page-title">Settings</h1>
+
+      <div class="card form">
+        <h2 class="card-title">Your vibe</h2>
+        <fieldset class="field" style="margin-top:-8px">
+          <legend class="sr-only">Color vibe</legend>
+          <div class="vibe-grid" id="vibeGrid"></div>
+        </fieldset>
+      </div>
+
+      <form class="card form" id="settingsForm" novalidate>
+        <div class="field">
+          <label for="setBudget">Weekly budget or allowance</label>
+          <div class="money-input"><span class="cur" data-cur-symbol>$</span><input id="setBudget" inputmode="decimal" autocomplete="off" aria-describedby="setBudgetErr"></div>
+          <p class="error" id="setBudgetErr" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="setReset">New week starts on</label>
+          <select id="setReset"></select>
+        </div>
+        <div class="field">
+          <label for="setCurrency">Currency</label>
+          <select id="setCurrency">
+            <option value="USD">US dollar ($)</option>
+            <option value="CAD">Canadian dollar ($)</option>
+            <option value="AUD">Australian dollar ($)</option>
+            <option value="EUR">Euro (€)</option>
+            <option value="GBP">British pound (£)</option>
+            <option value="MXN">Mexican peso ($)</option>
+            <option value="INR">Indian rupee (₹)</option>
+            <option value="JPY">Japanese yen (¥)</option>
+          </select>
+          <p class="hint">Changes the symbol only. Amounts are not converted.</p>
+        </div>
+        <button type="submit" class="btn">Save settings</button>
+      </form>
+
+      <div class="card form">
+        <div class="toggle-row">
+          <div>
+            <label for="setReminders" class="toggle-label">Daily check-in</label>
+            <p class="hint">If you haven't logged anything by this time, Home shows a small nudge.</p>
+          </div>
+          <input type="checkbox" id="setReminders" class="switch" role="switch">
+        </div>
+        <div class="field" id="reminderTimeField">
+          <label for="setReminderTime">Check-in time</label>
+          <input type="time" id="setReminderTime">
+        </div>
+      </div>
+
+      <div class="card form">
+        <h2 class="card-title">Your data</h2>
+        <p class="hint">Everything stays on this device. No account, no bank connection.</p>
+        <button type="button" class="btn btn-ghost" data-action="clear-sample" id="clearSampleBtn">Clear sample data</button>
+        <button type="button" class="btn btn-ghost" data-action="load-sample" id="loadSampleBtn">Load sample data</button>
+        <button type="button" class="btn btn-danger-ghost" id="resetAllBtn">Erase everything</button>
+        <div class="confirm" id="resetConfirm" hidden>
+          <p>This removes all purchases, goals and settings on this device.</p>
+          <div class="btn-row">
+            <button type="button" class="btn btn-ghost" id="resetCancel">Keep my data</button>
+            <button type="button" class="btn btn-danger" id="resetYes">Erase</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Tab bar with the + button docked in the middle, so it is
+       reachable from every tab and never covers a price -->
+  <nav class="tabs" aria-label="Main">
+    <button type="button" class="tab" data-go="home" aria-current="page"><svg><use href="#i-home"/></svg><span>Home</span></button>
+    <button type="button" class="tab" data-go="history"><svg><use href="#i-history"/></svg><span>History</span></button>
+    <span class="fab-slot"><button type="button" class="fab" id="fab" aria-label="Add a purchase" data-action="open-add"><svg><use href="#i-plus"/></svg></button></span>
+    <button type="button" class="tab" data-go="goals"><svg><use href="#i-goals"/></svg><span>Goals</span></button>
+    <button type="button" class="tab" data-go="settings"><svg><use href="#i-settings"/></svg><span>Settings</span></button>
+  </nav>
+</div>
+
+<!-- ================= ADD / EDIT PURCHASE ================= -->
+<dialog class="sheet" id="expenseSheet" aria-labelledby="expenseTitle">
+  <form method="dialog" id="expenseForm" novalidate>
+    <div class="sheet-head">
+      <h2 id="expenseTitle">Add a purchase</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+    </div>
+
+    <label for="expAmount" class="sr-only">Amount</label>
+    <div class="big-amount">
+      <span class="cur" data-cur-symbol>$</span>
+      <input id="expAmount" inputmode="decimal" placeholder="0.00" autocomplete="off" aria-describedby="expAmountErr">
+    </div>
+    <p class="error center" id="expAmountErr" aria-live="polite"></p>
+
+    <fieldset class="cat-picker">
+      <legend class="sr-only">Category</legend>
+      <div class="cat-grid" id="catGrid"></div>
+    </fieldset>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="expNote">Note <span class="muted">(optional)</span></label>
+        <input id="expNote" maxlength="60" placeholder="What was it?" autocomplete="off">
+      </div>
+      <div class="field field-date">
+        <label for="expDate">Date</label>
+        <input type="date" id="expDate" aria-describedby="expDateErr">
+      </div>
+    </div>
+    <p class="error" id="expDateErr" aria-live="polite"></p>
+
+    <button type="submit" class="btn btn-big" id="expSave">Save</button>
+    <button type="button" class="btn btn-danger-ghost" id="expDelete" hidden>Delete purchase</button>
+  </form>
+</dialog>
+
+<!-- ================= NEW / EDIT GOAL ================= -->
+<dialog class="sheet" id="goalSheet" aria-labelledby="goalTitle">
+  <form method="dialog" id="goalForm" novalidate>
+    <div class="sheet-head">
+      <h2 id="goalTitle">New goal</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <div class="field">
+      <label for="goalName">What are you saving for?</label>
+      <input id="goalName" maxlength="40" placeholder="Concert tickets" autocomplete="off" aria-describedby="goalNameErr">
+      <p class="error" id="goalNameErr" aria-live="polite"></p>
+    </div>
+    <div class="field">
+      <label for="goalTarget">Target amount</label>
+      <div class="money-input"><span class="cur" data-cur-symbol>$</span><input id="goalTarget" inputmode="decimal" placeholder="80" autocomplete="off" aria-describedby="goalTargetErr"></div>
+      <p class="error" id="goalTargetErr" aria-live="polite"></p>
+    </div>
+    <fieldset class="field">
+      <legend>Pick a sticker <span class="muted">(optional)</span></legend>
+      <div class="emoji-grid" id="emojiGrid"></div>
+    </fieldset>
+    <button type="submit" class="btn btn-big">Save goal</button>
+    <button type="button" class="btn btn-danger-ghost" id="goalDelete" hidden>Delete goal</button>
+  </form>
+</dialog>
+
+<!-- ================= ADD MONEY TO A GOAL ================= -->
+<dialog class="sheet" id="depositSheet" aria-labelledby="depositTitle">
+  <form method="dialog" id="depositForm" novalidate>
+    <div class="sheet-head">
+      <h2 id="depositTitle">Add to goal</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <label for="depAmount" class="sr-only">Amount to save</label>
+    <div class="big-amount">
+      <span class="cur" data-cur-symbol>$</span>
+      <input id="depAmount" inputmode="decimal" placeholder="0.00" autocomplete="off" aria-describedby="depAmountErr">
+    </div>
+    <p class="error center" id="depAmountErr" aria-live="polite"></p>
+    <fieldset class="field">
+      <legend>Where is this money from?</legend>
+      <div class="seg">
+        <label><input type="radio" name="depSource" value="budget" checked><span>This week's budget<small id="depLeftHint"></small></span></label>
+        <label><input type="radio" name="depSource" value="other"><span>Other money<small>Gift, job, birthday</small></span></label>
+      </div>
+    </fieldset>
+    <button type="submit" class="btn btn-big">Save money</button>
+  </form>
+</dialog>
+
+<!-- Toast with Undo, for deletes and saves -->
+<div class="toast" id="toast" role="status" aria-live="polite" hidden>
+  <span id="toastText"></span>
+  <button type="button" class="link-btn" id="toastUndo" hidden>Undo</button>
+</div>
+
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
